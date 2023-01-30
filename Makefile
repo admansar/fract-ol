@@ -7,8 +7,10 @@ CFLAGS = -I /usr/local/include/ -L /usr/local/lib -lmlx -framework OpenGL -frame
 all : $(NAME)
 
 $(NAME) : 
-	@echo "\033[0;36m"
-	$(CC) $(CFLAGS) main.c mandelbrot/complexe_operations.c mandelbrot/keys.c mandelbrot/mandelbrot.c mandelbrot/julia.c  -o $(NAME)
+	@echo "\033[1;36m"
+	make -C libft yes
+	@echo "\033[1;33m"
+	$(CC) $(CFLAGS) main.c mandelbrot/complexe_operations.c libft/libft.a mandelbrot/keys.c mandelbrot/mandelbrot.c mandelbrot/julia.c  -o $(NAME)
 	@echo
 
 clean :
@@ -18,5 +20,7 @@ clean :
 	@echo
 
 fclean : clean
+	@rm -rf libft/libft.a
+	@echo "\033[0;33mPerfectly"
 
 re : fclean all

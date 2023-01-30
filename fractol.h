@@ -6,7 +6,7 @@
 /*   By: admansar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 02:48:28 by admansar          #+#    #+#             */
-/*   Updated: 2023/01/28 19:35:38 by admansar         ###   ########.fr       */
+/*   Updated: 2023/01/30 22:39:22 by admansar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,17 @@
 # include <mlx.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include <limits.h>
+# include "libft/ft_printf.h"
+# include "libft/libft.h"
+
+# define TOOL 800
+# define L3ARD 800
+# define ITERATION 100
+# define JULIA_COLOR 0xF0F0FF
+# define MANDELBROT_COLOR 0xFFFFFF
+# define BEGIN_POINT 600
+# define LIMITS 22 * pow(10, 7)
 
 typedef struct s_data
 {
@@ -39,6 +50,9 @@ typedef struct position
 	int y;
 	double down;
 	double up;
+	double rotation_reel;
+	double rotation_imag;
+	int color;
 }					t_position;
 
 typedef struct da_ta
@@ -54,22 +68,24 @@ typedef struct da_ta
 }					t_my_data;
 
 void				my_mlx_pixel_put(t_data *data, int x, int y, int color);
+int magic(int key, t_my_data *my_data);
 t_complexe			creat_lst(double a, double b);
 t_complexe			somme(t_complexe a, t_complexe b);
 t_complexe			produit(t_complexe a, t_complexe b);
 t_complexe			*khwi(t_complexe *a);
 void				rec_f(t_complexe z, t_complexe c, int *blasa);
 void				proces_mandebrot(t_complexe z, int *blasa, t_complexe c,
-						int *color);
+						int *color, int *ss);
 void				proces(t_complexe z, int *blasa, t_complexe c,
-						int *color);
+						int *color, int *ss);
 int					funct(int key, t_my_data *my_data);
+int					funct_j(int key, t_my_data *my_data);
 void				fingerprint(t_my_data my_data);
 void				mandelbrot(void *ptr, void *win, t_position pos,int u);
-void				julia(int x);
+void				julia(void *ptr, void *win, t_position pos,long int u);
 int					mouse_hook(int key,int x, int y, t_my_data *my_data);
-void				*ft_bzero(void *str, size_t len);
-int					ft_strlen(char *q);
+int					mouse_hook_j(int key,int x, int y, t_my_data *my_data);
+int					magic_man(int key, t_my_data *my_data);
 
 
 #endif
