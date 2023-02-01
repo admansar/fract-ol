@@ -6,7 +6,7 @@
 /*   By: admansar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 15:34:07 by admansar          #+#    #+#             */
-/*   Updated: 2023/01/30 20:26:04 by admansar         ###   ########.fr       */
+/*   Updated: 2023/01/31 22:49:50 by admansar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,9 @@ void    proces(t_complexe z, int *blasa, t_complexe c, int *color, int *pos_colo
         (*color) = 0;
 }
 
-void    julia(void *ptr, void *win, t_position pos, long int x)
+void    julia(t_my_data my_data, long int x)
 {
-    t_my_data   my_data;
+//    t_my_data   my_data;
     t_complexe  z;
     t_complexe  c;
 
@@ -55,22 +55,22 @@ void    julia(void *ptr, void *win, t_position pos, long int x)
     my_data.j = -(L3ARD/2);
 //	printf("%ld\n", x);
 //    z = creat_lst(0, 0);
-    my_data.pos = pos;
-    my_data.ptr = ptr;
-	my_data.win= win;
+ //   my_data.pos = pos;
+ //   my_data.ptr = ptr;
+//	my_data.win= win;
     my_data.img.img = mlx_new_image(my_data.ptr, 1920, 1080);
     my_data.img.addr = mlx_get_data_addr(my_data.img.img,
             &my_data.img.bits_per_pixel, &my_data.img.line_length,
             &my_data.img.endian);
-	c.reel = 0.3 + pos.rotation_reel;
-	c.imaginaire = 0.5 + pos.rotation_imag;
+	c.reel = my_data.c.reel + my_data.pos.rotation_reel;
+	c.imaginaire = my_data.c.imaginaire + my_data.pos.rotation_imag;
     while (my_data.i++ < TOOL/2)
     {
         my_data.j = -L3ARD/2;
         while (my_data.j < L3ARD/2)
         {
-			z.reel = pos.up + (my_data.i + pos.x) / x;
-			z.imaginaire = pos.down + (my_data.j + pos.y) / x;
+			z.reel = my_data.pos.up + (my_data.i + my_data.pos.x) / x;
+			z.imaginaire = my_data.pos.down + (my_data.j + my_data.pos.y) / x;
             proces(z, &my_data.blasa, c, &my_data.color, &my_data.pos.color);
             my_mlx_pixel_put(&my_data.img, TOOL/2 + my_data.i, L3ARD/2 - my_data.j++,
                 my_data.color);

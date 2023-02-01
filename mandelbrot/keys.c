@@ -6,7 +6,7 @@
 /*   By: admansar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 03:02:32 by admansar          #+#    #+#             */
-/*   Updated: 2023/01/30 21:51:03 by admansar         ###   ########.fr       */
+/*   Updated: 2023/02/01 02:42:21 by admansar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,15 +149,15 @@ int	funct_j(int key, t_my_data *my_data)
 			my_data->pos.rotation_reel = 0;
 			my_data->pos.rotation_imag = 0;
 			my_data->pos.color = JULIA_COLOR;
+			my_data->pos.x = 0;
+			my_data->pos.y = 0;
 		}
 	//	printf("a===>%f\n", a);
 		my_data->pos.up = a;
 		my_data->pos.down = b;
-//		my_data->pos.x = 0;
-//		my_data->pos.y = 0;
 		mlx_destroy_image(my_data->ptr, my_data->img.img);
 		mlx_clear_window(my_data->ptr, my_data->win);
-        julia(my_data->ptr, my_data->win, my_data->pos, rest + BEGIN_POINT/2);
+        julia(*my_data, rest + BEGIN_POINT/2);
 	}
 //	printf("%d\n", key);
 	return (rest);
@@ -173,35 +173,35 @@ int magic(int key, t_my_data *my_data)
 		my_data->pos.rotation_reel += 0.02;
 		mlx_destroy_image(my_data->ptr, my_data->img.img);
 		mlx_clear_window(my_data->ptr, my_data->win);
-        julia(my_data->ptr, my_data->win, my_data->pos, rest + BEGIN_POINT/2);
+        julia(*my_data, rest + BEGIN_POINT/2);
 	}
 	if (key == 78)
 	{
 		my_data->pos.rotation_reel -= 0.02;
 		mlx_destroy_image(my_data->ptr, my_data->img.img);
 		mlx_clear_window(my_data->ptr, my_data->win);
-        julia(my_data->ptr, my_data->win, my_data->pos, rest + BEGIN_POINT/2);
+        julia(*my_data, rest + BEGIN_POINT/2);
 	}
 	if (key == 75)
 	{
 		my_data->pos.rotation_imag -= 0.02;
 		mlx_destroy_image(my_data->ptr, my_data->img.img);
 		mlx_clear_window(my_data->ptr, my_data->win);
-        julia(my_data->ptr, my_data->win, my_data->pos, rest + BEGIN_POINT/2);
+        julia(*my_data, rest + BEGIN_POINT/2);
 	}
 	if (key == 67)
 	{
 		my_data->pos.rotation_imag += 0.02;
 		mlx_destroy_image(my_data->ptr, my_data->img.img);
 		mlx_clear_window(my_data->ptr, my_data->win);
-        julia(my_data->ptr, my_data->win, my_data->pos, rest + BEGIN_POINT/2);
+        julia(*my_data, rest + BEGIN_POINT/2);
 	}
 	if (key == 8)
 	{
 		my_data->pos.color -= 500;
 		mlx_destroy_image(my_data->ptr, my_data->img.img);
 		mlx_clear_window(my_data->ptr, my_data->win);
-        julia(my_data->ptr, my_data->win, my_data->pos, rest + BEGIN_POINT/2);
+        julia(*my_data, rest + BEGIN_POINT/2);
 	}
 //	printf("%d\n", key);
 	return (rest);
@@ -217,14 +217,34 @@ int mouse_hook_j(int key,int x, int y, t_my_data *my_data)
 			a = a - 50;
 			return (a);
 		}
+	printf("lr = %f--------up = %f\n", my_data->pos.down, my_data->pos.up);
+		my_data->pos.color+=1;
     if (key == 5 && a > -BEGIN_POINT / 2)
     {
+		if (x - L3ARD/3 < 0)
+		{
+			my_data->pos.up -= 0.05;
+		}
+		else if (x -(2 * L3ARD/3) > 0)
+		{
+			my_data->pos.up += 0.05;
+		}
+			if (TOOL/3 > y)
+				{
+					my_data->pos.down += 0.02;
+//					my_data->pos.down *= 0.8;
+				}
+			else if ((2 * TOOL/3) < y)
+			{
+				my_data->pos.down -= 0.02;
+//				my_data->pos.down *= 0.8;
+			}
         a = a + 50;
 		if ( a + BEGIN_POINT / 2 > 500)
 			a = a * 1.05;
 		mlx_destroy_image(my_data->ptr, my_data->img.img);
 		mlx_clear_window(my_data->ptr, my_data->win);
-        julia(my_data->ptr, my_data->win, my_data->pos, a + BEGIN_POINT / 2);
+        julia(*my_data, a + BEGIN_POINT / 2);
      }
     if (key == 4)
     {
@@ -235,7 +255,7 @@ int mouse_hook_j(int key,int x, int y, t_my_data *my_data)
 		mlx_clear_window(my_data->ptr, my_data->win);
 		if (a < -BEGIN_POINT/2)
 			a = -BEGIN_POINT/2 + 1;
-		julia(my_data->ptr, my_data->win, my_data->pos, a + BEGIN_POINT / 2);
+		julia(*my_data, a + BEGIN_POINT / 2);
 	}
 	if (funct_j(0, my_data) == 1)
 		a = 0;

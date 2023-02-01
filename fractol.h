@@ -6,7 +6,7 @@
 /*   By: admansar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 02:48:28 by admansar          #+#    #+#             */
-/*   Updated: 2023/01/30 22:39:22 by admansar         ###   ########.fr       */
+/*   Updated: 2023/01/31 17:49:31 by admansar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ typedef struct da_ta
 	void			*ptr;
 	void			*win;
 	t_data			img;
+	t_complexe		c;
 	t_position		pos;
 }					t_my_data;
 
@@ -82,7 +83,7 @@ int					funct(int key, t_my_data *my_data);
 int					funct_j(int key, t_my_data *my_data);
 void				fingerprint(t_my_data my_data);
 void				mandelbrot(void *ptr, void *win, t_position pos,int u);
-void				julia(void *ptr, void *win, t_position pos,long int u);
+void				julia(t_my_data data,long int u);
 int					mouse_hook(int key,int x, int y, t_my_data *my_data);
 int					mouse_hook_j(int key,int x, int y, t_my_data *my_data);
 int					magic_man(int key, t_my_data *my_data);

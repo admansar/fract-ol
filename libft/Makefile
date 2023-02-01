@@ -6,7 +6,7 @@
 #    By: admansar <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/10 18:33:04 by admansar          #+#    #+#              #
-#    Updated: 2023/01/30 22:09:15 by admansar         ###   ########.fr        #
+#    Updated: 2023/01/31 14:51:06 by admansar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ CFLAGS = -Wall -Wextra -Werror
 CC = cc
 
 SRC = ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c ft_strlen.c ft_memset.c ft_bzero.c ft_memcpy.c \
-ft_memmove.c ft_strlcpy.c ft_strlcat.c ft_toupper.c ft_tolower.c ft_strchr.c ft_strrchr.c ft_memcmp.c ft_strnstr.c \
+ft_memmove.c ft_atof.c ft_strlcpy.c ft_strlcat.c ft_toupper.c ft_tolower.c ft_strchr.c ft_strrchr.c ft_memcmp.c ft_strnstr.c \
 ft_memchr.c ft_strncmp.c ft_strdup.c ft_calloc.c ft_atoi.c ft_substr.c ft_strjoin.c ft_strtrim.c ft_itoa.c ft_strmapi.c \
 ft_striteri.c ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c ft_split.c \
 ft_putadres.c ft_putnbr_hexa.c ft_putstr.c ft_printf.c ft_putchar.c ft_putnbr_hexa_up.c ft_printf.h	ft_putnbr.c	ft_putnbr_ui.c
