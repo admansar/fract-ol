@@ -6,7 +6,7 @@
 /*   By: admansar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 02:48:28 by admansar          #+#    #+#             */
-/*   Updated: 2023/01/31 17:49:31 by admansar         ###   ########.fr       */
+/*   Updated: 2023/02/01 19:54:05 by admansar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,6 @@ void				julia(t_my_data data,long int u);
 int					mouse_hook(int key,int x, int y, t_my_data *my_data);
 int					mouse_hook_j(int key,int x, int y, t_my_data *my_data);
 int					magic_man(int key, t_my_data *my_data);
-
+int					bye(t_my_data *my_data);
 
 #endif

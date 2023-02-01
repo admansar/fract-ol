@@ -6,7 +6,7 @@
 /*   By: admansar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 15:34:07 by admansar          #+#    #+#             */
-/*   Updated: 2023/01/31 22:49:50 by admansar         ###   ########.fr       */
+/*   Updated: 2023/02/01 19:50:48 by admansar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void    fingerprint_julia(t_my_data my_data)
 	mlx_key_hook(my_data.win, funct_j, &my_data);
 	mlx_mouse_hook(my_data.win, mouse_hook_j, &my_data);
 	mlx_hook(my_data.win, 2, 0, magic, &my_data);
+	mlx_hook(my_data.win, 17, 0, bye, &my_data);
 	mlx_loop(my_data.ptr);
 }
 

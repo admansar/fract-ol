@@ -6,7 +6,7 @@
 /*   By: admansar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 03:05:40 by admansar          #+#    #+#             */
-/*   Updated: 2023/01/31 13:36:36 by admansar         ###   ########.fr       */
+/*   Updated: 2023/02/01 18:05:49 by admansar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,16 +43,19 @@ int	main(int ac, char **av)
 		}
 		else if (ac == 4)
 		{
-			my_data.pos.color = JULIA_COLOR;
-			my_data.ptr = mlx_init();
 			my_data.c.reel = ft_atof(av[2]);
 			my_data.c.imaginaire = ft_atof(av[3]);
-			my_data.win = mlx_new_window(my_data.ptr, TOOL, L3ARD, "Julia");
-			julia(my_data, BEGIN_POINT/2);
+			if ((my_data.c.reel >= -2 && my_data.c.reel <= 2 ) && (my_data.c.imaginaire >= -2 && my_data.c.imaginaire <= 2))
+			{
+				my_data.pos.color = JULIA_COLOR;
+				my_data.ptr = mlx_init();
+				my_data.win = mlx_new_window(my_data.ptr, TOOL, L3ARD, "Julia");
+				julia(my_data, BEGIN_POINT/2);
+			}
 		}
 	}
 	}
 	ft_printf("\033[4;31m             _______________________________________________            \033[0m");
-		ft_printf("\n\n\n so that's the fractol project \n and this is \033[1;37mTHE MINI HELP\033[0m\nif you see it that's mean that you're strugling ... broo i'll give you some hunts\nso to see mandelbrot set print \033[1;32mMandelbrot \033[0mand if you want to see julia set then print \033[1;32mJulia \033[0m\n\033[4;31mkeep in mind: if you need an exact set for julia print two float numbers after Julia and have fun ;)\n\n\n\n");
-	ft_printf("              _______________________________________________            \n");
+		ft_printf("\n\n\n so that's the fractol project \n and this is \033[1;37mTHE MINI HELP\033[0m\nif you see it that's mean that you're strugling ... broo i'll give you some hunts\nso to see mandelbrot set print \033[1;32mMandelbrot \033[0mand if you want to see julia set then print \033[1;32mJulia \033[0m\n\033[1;31mkeep in mind:\033[4;31m if you need an exact set for julia print two float numbers after Julia \033[47mbetwen 2 and -2\033[0m \n\n                                 have fun ;)\n\n\n\n");
+	ft_printf("\033[4;31m               _______________________________________________            \n");
 }
