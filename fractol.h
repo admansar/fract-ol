@@ -6,7 +6,7 @@
 /*   By: admansar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 02:48:28 by admansar          #+#    #+#             */
-/*   Updated: 2023/02/05 15:02:29 by admansar         ###   ########.fr       */
+/*   Updated: 2023/02/05 16:57:57 by admansar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,4 +93,11 @@ void			boot_julia(t_my_data *my_data);
 void			escape(t_my_data *my_data, int key);
 void			in_or_out(int key, double *a, double *b, int rest);
 void			etat_init(t_my_data *my_data, int o);
+void			follow_x(int x, double rest, t_my_data *my_data);
+void			follow_y(int y, double rest, t_my_data *my_data);
+void			key_five(int *a, t_my_data *my_data);
+void			key_five_j(long int *a, t_my_data *my_data);
+void			key_four(int *a, t_my_data *my_data);
+void			key_four_j(long int *a, t_my_data *my_data);
+
 #endif

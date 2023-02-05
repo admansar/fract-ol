@@ -6,7 +6,7 @@
 /*   By: admansar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 03:02:32 by admansar          #+#    #+#             */
-/*   Updated: 2023/02/05 15:44:24 by admansar         ###   ########.fr       */
+/*   Updated: 2023/02/05 16:58:52 by admansar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,6 @@ int	funct(int key, t_my_data *my_data)
 	return (rest);
 }
 
-void	follow_x(int x, double rest, t_my_data *my_data);
-void	follow_y(int y, double rest, t_my_data *my_data);
-void	key_five(int *a, t_my_data *my_data);
-void	key_five_j(long int *a, t_my_data *my_data);
 int	mouse_hook(int key, int x, int y, t_my_data *my_data)
 {
 	static int	a;
@@ -66,19 +62,13 @@ int	mouse_hook(int key, int x, int y, t_my_data *my_data)
 	}
 	if (key == 5)
 	{
-		key_five(&a, my_data)
+		follow_x(x, rest, my_data);
+		follow_y(y, rest, my_data);
+		key_five(&a, my_data);
 	}
 	if (key == 4)
 	{
-		my_data->pos.color -= 2;
-		a = a - 50;
-		if (a + BEGIN_POINT > 2000)
-			a = a / 1.05;
-		mlx_destroy_image(my_data->ptr, my_data->img.img);
-		mlx_clear_window(my_data->ptr, my_data->win);
-		if (a < -BEGIN_POINT)
-			a = -BEGIN_POINT;
-		mandelbrot(*my_data, a + BEGIN_POINT);
+		key_four(&a, my_data);
 	}
 	if (funct(0, my_data) == 1)
 		a = 0;
@@ -112,39 +102,34 @@ int	funct_j(int key, t_my_data *my_data)
 	return (rest);
 }
 
+void	live(t_my_data *my_data, char pm, char ir, double rest)
+{
+	if (pm == '+' && ir == 'r')
+		my_data->pos.rotation_reel += 0.02;
+	else if (pm == '-' && ir == 'r')
+		my_data->pos.rotation_reel -= 0.02;
+	else if (pm == '-' && ir == 'i')
+		my_data->pos.rotation_imag -= 0.02;
+	else if (pm == '+' && ir == 'i')
+		my_data->pos.rotation_imag += 0.02;
+	mlx_destroy_image(my_data->ptr, my_data->img.img);
+	mlx_clear_window(my_data->ptr, my_data->win);
+	julia(*my_data, rest + BEGIN_POINT / 2);
+}
+
 int	magic(int key, t_my_data *my_data)
 {
 	double	rest;
 
 	rest = mouse_hook_j(0, my_data->pos.x, my_data->pos.y, my_data);
 	if (key == 69)
-	{
-		my_data->pos.rotation_reel += 0.02;
-		mlx_destroy_image(my_data->ptr, my_data->img.img);
-		mlx_clear_window(my_data->ptr, my_data->win);
-		julia(*my_data, rest + BEGIN_POINT / 2);
-	}
+		live(my_data, '+', 'r', rest);
 	if (key == 78)
-	{
-		my_data->pos.rotation_reel -= 0.02;
-		mlx_destroy_image(my_data->ptr, my_data->img.img);
-		mlx_clear_window(my_data->ptr, my_data->win);
-		julia(*my_data, rest + BEGIN_POINT / 2);
-	}
+		live(my_data, '-', 'r', rest);
 	if (key == 75)
-	{
-		my_data->pos.rotation_imag -= 0.02;
-		mlx_destroy_image(my_data->ptr, my_data->img.img);
-		mlx_clear_window(my_data->ptr, my_data->win);
-		julia(*my_data, rest + BEGIN_POINT / 2);
-	}
+		live(my_data, '-', 'i', rest);
 	if (key == 67)
-	{
-		my_data->pos.rotation_imag += 0.02;
-		mlx_destroy_image(my_data->ptr, my_data->img.img);
-		mlx_clear_window(my_data->ptr, my_data->win);
-		julia(*my_data, rest + BEGIN_POINT / 2);
-	}
+		live(my_data, '+', 'i', rest);
 	if (key == 8)
 	{
 		my_data->pos.color -= 500;
@@ -175,19 +160,26 @@ int	mouse_hook_j(int key, int x, int y, t_my_data *my_data)
 	}
 	if (key == 4)
 	{
-		my_data->pos.color -= 1;
-		a = a - 50;
-		if (a + BEGIN_POINT / 2 > 500)
-			a = a / 1.05;
-		mlx_destroy_image(my_data->ptr, my_data->img.img);
-		mlx_clear_window(my_data->ptr, my_data->win);
-		if (a < -BEGIN_POINT / 2)
-			a = -BEGIN_POINT / 2 + 1;
-		julia(*my_data, a + BEGIN_POINT / 2);
+		key_four_j(&a, my_data);
 	}
 	if (funct_j(0, my_data) == 1)
 		a = 0;
 	return (a);
+}
+
+void	live_man(t_my_data *my_data, char pm, char ir, double rest)
+{
+	if (pm == '+' && ir == 'r')
+		my_data->pos.rotation_reel += 0.02;
+	else if (pm == '-' && ir == 'r')
+		my_data->pos.rotation_reel -= 0.02;
+	else if (pm == '-' && ir == 'i')
+		my_data->pos.rotation_imag -= 0.02;
+	else if (pm == '+' && ir == 'i')
+		my_data->pos.rotation_imag += 0.02;
+	mlx_destroy_image(my_data->ptr, my_data->img.img);
+	mlx_clear_window(my_data->ptr, my_data->win);
+	mandelbrot(*my_data, rest + BEGIN_POINT);
 }
 
 int	magic_man(int key, t_my_data *my_data)
@@ -196,33 +188,13 @@ int	magic_man(int key, t_my_data *my_data)
 
 	rest = mouse_hook(0, my_data->pos.x, my_data->pos.y, my_data);
 	if (key == 69)
-	{
-		my_data->pos.rotation_reel += 0.02;
-		mlx_destroy_image(my_data->ptr, my_data->img.img);
-		mlx_clear_window(my_data->ptr, my_data->win);
-		mandelbrot(*my_data, rest + BEGIN_POINT);
-	}
+		live_man(my_data, '+', 'r', rest);
 	if (key == 78)
-	{
-		my_data->pos.rotation_reel -= 0.02;
-		mlx_destroy_image(my_data->ptr, my_data->img.img);
-		mlx_clear_window(my_data->ptr, my_data->win);
-		mandelbrot(*my_data, rest + BEGIN_POINT);
-	}
+		live_man(my_data, '-', 'r', rest);
 	if (key == 75)
-	{
-		my_data->pos.rotation_imag -= 0.02;
-		mlx_destroy_image(my_data->ptr, my_data->img.img);
-		mlx_clear_window(my_data->ptr, my_data->win);
-		mandelbrot(*my_data, rest + BEGIN_POINT);
-	}
+		live_man(my_data, '-', 'i', rest);
 	if (key == 67)
-	{
-		my_data->pos.rotation_imag += 0.02;
-		mlx_destroy_image(my_data->ptr, my_data->img.img);
-		mlx_clear_window(my_data->ptr, my_data->win);
-		mandelbrot(*my_data, rest + BEGIN_POINT);
-	}
+		live_man(my_data, '+', 'i', rest);
 	if (key == 8)
 	{
 		my_data->pos.color -= 500;
@@ -249,6 +221,7 @@ void	escape(t_my_data *my_data, int key)
 		exit(0);
 	}
 }
+
 void	in_or_out(int key, double *a, double *b, int rest)
 {
 	if (rest <= 2000)
@@ -274,6 +247,7 @@ void	in_or_out(int key, double *a, double *b, int rest)
 			(*b) = (*b) - (100 / rest);
 	}
 }
+
 void	follow_x(int x, double rest, t_my_data *my_data)
 {
 	if (x - L3ARD / 3 < 0)
@@ -320,6 +294,7 @@ void	key_five_j(long int *a, t_my_data *my_data)
 	mlx_clear_window(my_data->ptr, my_data->win);
 	julia(*my_data, (*a) + BEGIN_POINT / 2);
 }
+
 void	key_five(int *a, t_my_data *my_data)
 {
 	my_data->pos.color += 2;
@@ -328,5 +303,31 @@ void	key_five(int *a, t_my_data *my_data)
 		(*a) = (*a) * 1.05;
 	mlx_destroy_image(my_data->ptr, my_data->img.img);
 	mlx_clear_window(my_data->ptr, my_data->win);
-	mandelbrot(*my_data, a + BEGIN_POINT);
+	mandelbrot(*my_data, (*a) + BEGIN_POINT);
+}
+
+void	key_four(int *a, t_my_data *my_data)
+{
+	my_data->pos.color -= 2;
+	(*a) = (*a) - 50;
+	if ((*a) + BEGIN_POINT > 2000)
+		(*a) = (*a) / 1.05;
+	mlx_destroy_image(my_data->ptr, my_data->img.img);
+	mlx_clear_window(my_data->ptr, my_data->win);
+	if ((*a) < -BEGIN_POINT)
+		(*a) = -BEGIN_POINT;
+	mandelbrot(*my_data, (*a) + BEGIN_POINT);
+}
+
+void	key_four_j(long int *a, t_my_data *my_data)
+{
+	my_data->pos.color -= 1;
+	(*a) = (*a) - 50;
+	if ((*a) + BEGIN_POINT / 2 > 500)
+		(*a) = (*a) / 1.05;
+	mlx_destroy_image(my_data->ptr, my_data->img.img);
+	mlx_clear_window(my_data->ptr, my_data->win);
+	if ((*a) < -BEGIN_POINT / 2)
+		(*a) = -BEGIN_POINT / 2 + 1;
+	julia(*my_data, (*a) + BEGIN_POINT / 2);
 }
