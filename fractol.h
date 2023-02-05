@@ -6,7 +6,7 @@
 /*   By: admansar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 02:48:28 by admansar          #+#    #+#             */
-/*   Updated: 2023/02/05 16:57:57 by admansar         ###   ########.fr       */
+/*   Updated: 2023/02/05 22:44:29 by admansar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ int				magic_man(int key, t_my_data *my_data);
 int				bye(t_my_data *my_data);
 void			boot_mandelbrot(t_my_data *my_data);
 void			boot_julia(t_my_data *my_data);
+void			boot_burning_ship(t_my_data *my_data);
 void			escape(t_my_data *my_data, int key);
 void			in_or_out(int key, double *a, double *b, int rest);
 void			etat_init(t_my_data *my_data, int o);
@@ -99,5 +100,13 @@ void			key_five(int *a, t_my_data *my_data);
 void			key_five_j(long int *a, t_my_data *my_data);
 void			key_four(int *a, t_my_data *my_data);
 void			key_four_j(long int *a, t_my_data *my_data);
+void			live(t_my_data *my_data, char pm, char ir, double rest);
+void			burning_ship(t_my_data my_data, int alpha);
+void			key_four_bs(int *a, t_my_data *my_data);
+void			key_five_bs(int *a, t_my_data *my_data);
+void			live_bs(t_my_data *my_data, char pm, char ir, double rest);
+int				magic_bs(int key, t_my_data *my_data);
+void			help_bonus(void);
+int				mouse_hook_bs(int key, int x, int y, t_my_data *my_data);
 
 #endif
