@@ -6,13 +6,13 @@
 /*   By: admansar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 15:34:07 by admansar          #+#    #+#             */
-/*   Updated: 2023/02/01 19:50:48 by admansar         ###   ########.fr       */
+/*   Updated: 2023/02/05 14:12:59 by admansar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../fractol.h"
 
-void    fingerprint_julia(t_my_data my_data)
+void	fingerprint_julia(t_my_data my_data)
 {
 	mlx_put_image_to_window(my_data.ptr, my_data.win, my_data.img.img, 0, 0);
 	mlx_key_hook(my_data.win, funct_j, &my_data);
@@ -22,63 +22,51 @@ void    fingerprint_julia(t_my_data my_data)
 	mlx_loop(my_data.ptr);
 }
 
-void    proces(t_complexe z, int *blasa, t_complexe c, int *color, int *pos_color)
+void	proces(t_complexe z, t_complexe c, t_my_data *d)
 {
-    (*blasa) = 0;
- 	t_complexe	pro;
+	t_complexe	pro;
 
-//	printf("c =>%f----------%f\n", c.reel, c.imaginaire);
-
-	while ((*blasa) < ITERATION)
+	d->blasa = 0;
+	while (d->blasa < ITERATION)
 	{
 		pro.reel = z.reel * z.reel - z.imaginaire * z.imaginaire;
 		pro.imaginaire = 2 * z.reel * z.imaginaire;
 		z.reel = pro.reel + c.reel;
-		z.imaginaire = pro.imaginaire + c.imaginaire;	
-//	printf("z=>%f----------%f\n", z.reel, z.imaginaire);
-		(*blasa)++;
-		if ((z.reel*z.reel) + (z.imaginaire*z.imaginaire)>= 4)
+		z.imaginaire = pro.imaginaire + c.imaginaire;
+		d->blasa++;
+		if ((z.reel * z.reel) + (z.imaginaire * z.imaginaire) >= 4)
 			break ;
 	}
-//	printf("%d\n",(*blasa));
-    (*color) = (*pos_color) * (*blasa);
-    if ((*blasa) == ITERATION)
-        (*color) = 0;
+	(d->color) = d->pos.color * (d->blasa);
+	if ((d->blasa) == ITERATION)
+		(d->color) = 0;
 }
 
-void    julia(t_my_data my_data, long int x)
+void	julia(t_my_data my_data, long int x)
 {
-//    t_my_data   my_data;
-    t_complexe  z;
-    t_complexe  c;
+	t_complexe	z;
+	t_complexe	c;
 
-    my_data.i = -(TOOL/2);
-    my_data.j = -(L3ARD/2);
-//	printf("%ld\n", x);
-//    z = creat_lst(0, 0);
- //   my_data.pos = pos;
- //   my_data.ptr = ptr;
-//	my_data.win= win;
-    my_data.img.img = mlx_new_image(my_data.ptr, 1920, 1080);
-    my_data.img.addr = mlx_get_data_addr(my_data.img.img,
-            &my_data.img.bits_per_pixel, &my_data.img.line_length,
-            &my_data.img.endian);
+	my_data.i = -(TOOL / 2);
+	my_data.j = -(L3ARD / 2);
+	my_data.img.img = mlx_new_image(my_data.ptr, 1920, 1080);
+	my_data.img.addr = mlx_get_data_addr(my_data.img.img,
+			&my_data.img.bits_per_pixel,
+			&my_data.img.line_length,
+			&my_data.img.endian);
 	c.reel = my_data.c.reel + my_data.pos.rotation_reel;
 	c.imaginaire = my_data.c.imaginaire + my_data.pos.rotation_imag;
-    while (my_data.i++ < TOOL/2)
-    {
-        my_data.j = -L3ARD/2;
-        while (my_data.j < L3ARD/2)
-        {
+	while (my_data.i++ < TOOL / 2)
+	{
+		my_data.j = -L3ARD / 2;
+		while (my_data.j < L3ARD / 2)
+		{
 			z.reel = my_data.pos.up + (my_data.i + my_data.pos.x) / x;
 			z.imaginaire = my_data.pos.down + (my_data.j + my_data.pos.y) / x;
-            proces(z, &my_data.blasa, c, &my_data.color, &my_data.pos.color);
-            my_mlx_pixel_put(&my_data.img, TOOL/2 + my_data.i, L3ARD/2 - my_data.j++,
-                my_data.color);
-//			c.reel = 0;
-//			c.imaginaire = 0;
-        }
-    }
-    fingerprint_julia(my_data);
+			proces(z, c, &my_data);
+			my_mlx_pixel_put(&my_data.img, TOOL / 2 + my_data.i, L3ARD / 2
+				- my_data.j++, my_data.color);
+		}
+	}
+	fingerprint_julia(my_data);
 }
-

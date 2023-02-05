@@ -2,7 +2,9 @@ NAME = fractol
 
 CC = cc
 
-CFLAGS = -I /usr/local/include/ -L /usr/local/lib -lmlx -framework OpenGL -framework AppKit
+CFLAGS = -I /usr/local/include/ -L /usr/local/lib -lmlx -framework OpenGL -framework AppKit -Wall -Wextra -Werror
+
+SRC =  main.c mandelbrot/complexe_operations.c help.c mandelbrot/keys.c mandelbrot/mandelbrot.c mandelbrot/mandelbrot_utils.c mandelbrot/julia.c mandelbrot/julia_utils.c
 
 all : $(NAME)
 
@@ -10,7 +12,7 @@ $(NAME) :
 	@echo "\033[1;36m"
 	make -C libft yes
 	@echo "\033[1;33m"
-	$(CC) $(CFLAGS) main.c mandelbrot/complexe_operations.c libft/libft.a mandelbrot/keys.c mandelbrot/mandelbrot.c mandelbrot/julia.c  -o $(NAME)
+	$(CC) $(CFLAGS) libft/libft.a $(SRC) -o $(NAME)
 	@echo
 
 clean :

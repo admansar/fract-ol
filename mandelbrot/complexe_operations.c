@@ -14,7 +14,7 @@
 
 t_complexe	creat_lst(double a, double b)
 {
-	t_complexe ada;
+	t_complexe	ada;
 
 	ada.reel = a;
 	ada.imaginaire = b;
@@ -28,10 +28,10 @@ t_complexe	somme(t_complexe a, t_complexe b)
 
 t_complexe	produit(t_complexe a, t_complexe b)
 {
-	double		a1;
-	double		a2;
-	double		b1;
-	double		b2;
+	double	a1;
+	double	a2;
+	double	b1;
+	double	b2;
 
 	a1 = a.reel;
 	a2 = a.imaginaire;
