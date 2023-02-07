@@ -16,36 +16,44 @@ OBJ_B = ${SRC_B:.c=.o}
 
 B = bonus
 
+LIBFT = libft/libft.a
+
+HEADER = fractol.h
+
 all : $(NAME)
 
-$(NAME) : 
+$(NAME) : $(SRC) $(HEADER)
 	@echo "\033[1;36m"
-	make -C libft yes
+	@make -C libft
 	@echo "\033[1;33m"
 	$(CC) $(CFLAGS) $(MLXFLAGS) libft/libft.a $(SRC) -o $(NAME)
 	@echo
 
-$(B) : $(OBJ_B)
+$(B) : $(OBJ_B) $(HEADER)
 	@echo 
 	@echo "\033[1;36m"
-	make -C libft all
+	@make -C libft
 	@echo "\033[1;33m"
 	$(CC) $(CFLAGS) $(MLXFLAGS) libft/libft.a $(OBJ_B) -o $(NAME_B)
 
+$(LIBFT):
+	make -C libft
+
 clean :
 	@echo
-	@rm -f $(NAME)
-	@rm -f $(NAME_B) 
 	@rm -f *.o && rm -f bonus/*.o && rm -f sets/*.o
+	make -C libft clean
 	@echo "\033[0;33mCleaned"
 	@echo
 
 nothing :
 
 fclean : clean
-	@rm -rf libft/libft.a
+	@rm -f $(NAME)
+	@rm -f $(NAME_B)
 	@echo "\033[0;33mPerfectly"
 
 re : fclean all
 
 re_bonus : fclean bonus
+
