@@ -6,14 +6,17 @@
 /*   By: admansar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 19:46:00 by admansar          #+#    #+#             */
-/*   Updated: 2023/02/05 19:46:26 by admansar         ###   ########.fr       */
+/*   Updated: 2023/02/07 01:43:06 by admansar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../fractol.h"
 
-void	follow_x(int x, double rest, t_my_data *my_data)
+double	follow_x(int x, double rest, t_my_data *my_data)
 {
+	double	tmp;
+
+	tmp = my_data->pos.up;
 	if (x - L3ARD / 3 < 0)
 	{
 		if (rest <= 2000)
@@ -28,10 +31,14 @@ void	follow_x(int x, double rest, t_my_data *my_data)
 		else
 			my_data->pos.up += (50 / rest);
 	}
+	return (my_data->pos.up - tmp);
 }
 
-void	follow_y(int y, double rest, t_my_data *my_data)
+double	follow_y(int y, double rest, t_my_data *my_data)
 {
+	double	tmp;
+
+	tmp = my_data->pos.down;
 	if (TOOL / 3 > y)
 	{
 		if (rest <= 2000)
@@ -46,6 +53,7 @@ void	follow_y(int y, double rest, t_my_data *my_data)
 		else
 			my_data->pos.down -= (50 / rest);
 	}
+	return (my_data->pos.down - tmp);
 }
 
 void	key_five(int *a, t_my_data *my_data)

@@ -6,7 +6,7 @@
 /*   By: admansar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 02:48:28 by admansar          #+#    #+#             */
-/*   Updated: 2023/02/05 22:44:29 by admansar         ###   ########.fr       */
+/*   Updated: 2023/02/07 08:27:18 by admansar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ typedef struct s_da_ta
 	t_complexe	c;
 	t_complexe	z;
 	t_position	pos;
+	t_position	tmp;
 }				t_my_data;
 
 void			my_mlx_pixel_put(t_data *data, int x, int y, int color);
@@ -92,10 +93,10 @@ void			boot_mandelbrot(t_my_data *my_data);
 void			boot_julia(t_my_data *my_data);
 void			boot_burning_ship(t_my_data *my_data);
 void			escape(t_my_data *my_data, int key);
-void			in_or_out(int key, double *a, double *b, int rest);
+void			in_or_out(int key, double *a, double *b, float rest);
 void			etat_init(t_my_data *my_data, int o);
-void			follow_x(int x, double rest, t_my_data *my_data);
-void			follow_y(int y, double rest, t_my_data *my_data);
+double			follow_x(int x, double rest, t_my_data *my_data);
+double			follow_y(int y, double rest, t_my_data *my_data);
 void			key_five(int *a, t_my_data *my_data);
 void			key_five_j(long int *a, t_my_data *my_data);
 void			key_four(int *a, t_my_data *my_data);
@@ -108,5 +109,7 @@ void			live_bs(t_my_data *my_data, char pm, char ir, double rest);
 int				magic_bs(int key, t_my_data *my_data);
 void			help_bonus(void);
 int				mouse_hook_bs(int key, int x, int y, t_my_data *my_data);
+int				funct_bs(int key, t_my_data *my_data);
+int				guard(char *c);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: admansar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 19:43:48 by admansar          #+#    #+#             */
-/*   Updated: 2023/02/05 19:46:59 by admansar         ###   ########.fr       */
+/*   Updated: 2023/02/07 08:34:18 by admansar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	escape(t_my_data *my_data, int key)
 	}
 }
 
-void	in_or_out(int key, double *a, double *b, int rest)
+void	in_or_out(int key, double *a, double *b, float rest)
 {
 	if (rest <= 2000)
 	{

@@ -6,7 +6,7 @@
 /*   By: admansar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 22:55:43 by admansar          #+#    #+#             */
-/*   Updated: 2023/02/05 21:54:14 by admansar         ###   ########.fr       */
+/*   Updated: 2023/02/07 08:47:35 by admansar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	boot_burning_ship(t_my_data *my_data)
 {
-	my_data->pos.color = MANDELBROT_COLOR;
+	my_data->pos.color = 0x00FFFF;
 	my_data->ptr = mlx_init();
-	my_data->win = mlx_new_window(my_data->ptr, TOOL, L3ARD, "Mandelbrot");
+	my_data->win = mlx_new_window(my_data->ptr, TOOL, L3ARD, "bs");
 	burning_ship(*my_data, BEGIN_POINT);
 }
 

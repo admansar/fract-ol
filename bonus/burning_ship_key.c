@@ -6,7 +6,7 @@
 /*   By: admansar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 03:02:32 by admansar          #+#    #+#             */
-/*   Updated: 2023/02/05 22:00:28 by admansar         ###   ########.fr       */
+/*   Updated: 2023/02/06 19:35:58 by admansar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	funct_bs(int key, t_my_data *my_data)
 	escape(my_data, key);
 	if ((key >= 123 && key <= 126) || key == 15)
 	{
-		rest = mouse_hook(0, my_data->pos.x, my_data->pos.y, my_data);
+		rest = mouse_hook_bs(0, my_data->pos.x, my_data->pos.y, my_data);
 		in_or_out(key, &a, &b, rest);
 		if (key == 15)
 		{
@@ -61,7 +61,7 @@ int	mouse_hook_bs(int key, int x, int y, t_my_data *my_data)
 	{
 		key_four_bs(&a, my_data);
 	}
-	if (funct(0, my_data) == 1)
+	if (funct_bs(0, my_data) == 1)
 		a = 0;
 	return (a);
 }
@@ -85,7 +85,7 @@ int	magic_bs(int key, t_my_data *my_data)
 {
 	double	rest;
 
-	rest = mouse_hook(0, my_data->pos.x, my_data->pos.y, my_data);
+	rest = mouse_hook_bs(0, my_data->pos.x, my_data->pos.y, my_data);
 	if (key == 69)
 		live_bs(my_data, '+', 'r', rest);
 	if (key == 78)

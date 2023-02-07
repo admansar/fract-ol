@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   keys.c                                             :+:      :+:    :+:   */
+/*   mandelbrot_key.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: admansar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 03:02:32 by admansar          #+#    #+#             */
-/*   Updated: 2023/02/05 19:35:44 by admansar         ###   ########.fr       */
+/*   Updated: 2023/02/07 08:43:54 by admansar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,8 @@ int	mouse_hook(int key, int x, int y, t_my_data *my_data)
 	}
 	if (key == 5)
 	{
-		follow_x(x, rest, my_data);
-		follow_y(y, rest, my_data);
+		my_data->tmp.up = follow_x(x, rest, my_data);
+		my_data->tmp.down = follow_y(y, rest, my_data);
 		key_five(&a, my_data);
 	}
 	if (key == 4)

@@ -6,7 +6,7 @@
 /*   By: admansar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 02:11:29 by admansar          #+#    #+#             */
-/*   Updated: 2023/02/05 22:44:45 by admansar         ###   ########.fr       */
+/*   Updated: 2023/02/06 19:34:25 by admansar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	proces_bs(t_complexe z, t_complexe c, t_my_data *data)
 		pro.reel = z.reel * z.reel - z.imaginaire * z.imaginaire;
 		pro.imaginaire = 2 * z.reel * z.imaginaire;
 		z.reel = fabs(pro.reel + c.reel);
-		z.imaginaire = fabs(pro.imaginaire + c.imaginaire);
+		z.imaginaire = -fabs(pro.imaginaire + c.imaginaire);
 		data->blasa++;
 	}
 	data->color = data->pos.color * data->blasa;
@@ -35,7 +35,7 @@ void	proces_bs(t_complexe z, t_complexe c, t_my_data *data)
 void	fingerprint_bs(t_my_data my_data)
 {
 	mlx_put_image_to_window(my_data.ptr, my_data.win, my_data.img.img, 0, 0);
-	mlx_key_hook(my_data.win, funct, &my_data);
+	mlx_key_hook(my_data.win, funct_bs, &my_data);
 	mlx_mouse_hook(my_data.win, mouse_hook_bs, &my_data);
 	mlx_hook(my_data.win, 2, 0, magic_bs, &my_data);
 	mlx_hook(my_data.win, 17, 0, bye, &my_data);
